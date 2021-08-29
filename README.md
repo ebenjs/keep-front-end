@@ -1,4 +1,7 @@
 # keep
+An open source note keeping software
+
+![Screenshot](https://ibb.co/crR4D08 "a title")
 
 ## Project setup
 ```
