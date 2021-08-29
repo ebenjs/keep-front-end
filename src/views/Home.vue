@@ -221,7 +221,6 @@ export default {
       this.noteContent = this.currentSelectedNote.content;
     },
     editNoteEffective() {
-      console.log(this.currentSelectedNote);
       axios.patch('http://localhost:3000/editNote', {
         // eslint-disable-next-line no-underscore-dangle
         _id: this.currentSelectedNote._id,
@@ -232,11 +231,12 @@ export default {
         .then((response) => {
           if (response.status === 201) {
             this.showToast('Note edited !');
-            console.log(response.data.note);
             this.noteTitle = '';
             this.noteContent = '';
             this.newNoteModal.toggle();
-            this.notes[0] = response.data.note;
+            this.currentSelectedNote.title = response.data.note.title;
+            this.currentSelectedNote.content = response.data.note.content;
+            this.currentSelectedNote.editedDate = response.data.note.editedDate;
           }
         })
         .catch((error) => {
