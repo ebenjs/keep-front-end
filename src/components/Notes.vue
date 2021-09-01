@@ -44,8 +44,7 @@
           </div>
           <div class="modal-body" v-if="currentSelectedNote">
             <h4>{{ currentSelectedNote.title }}</h4>
-            <div id="noteContentDiv">
-              {{ currentSelectedNote.content }}
+            <div id="noteContentDiv" v-html="formatMarkdown">
             </div>
           </div>
         </div>
@@ -106,6 +105,7 @@
 <script>
 import axios from 'axios';
 import copy from 'copy-to-clipboard';
+
 import Note from './Note.vue';
 
 export default {
@@ -263,6 +263,11 @@ export default {
           this.noteModeModalDescription = 'You are about to edit a note';
         }
       }
+    },
+  },
+  computed: {
+    formatMarkdown() {
+      return this.$store.state.md.render(this.currentSelectedNote.content);
     },
   },
   mounted() {
