@@ -5,7 +5,7 @@
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ note.title }}</h5>
-            <p class="card-text">{{ truncate(note.content, 50) }}</p>
+            <p class="card-text" v-html="formatMarkdown"></p>
             <p>
               <small>Update : {{ formatTimestamp(note.editedDate) }}</small>
             </p>
@@ -32,6 +32,11 @@ export default {
         return `${text.substring(0, limit - 1)}...`;
       }
       return text;
+    },
+  },
+  computed: {
+    formatMarkdown() {
+      return this.truncate(this.$store.state.md.render(this.note.content), 50);
     },
   },
 };
