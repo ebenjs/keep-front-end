@@ -1,5 +1,5 @@
 <template>
-        <div class="card">
+        <div class="card shadow-sm">
           <div class="card-header">
             Created on : {{ formatTimestamp(note.createdDate) }}
           </div>
