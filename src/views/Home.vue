@@ -3,16 +3,12 @@
 </template>
 
 <script>
-import Notes from '../components/Notes.vue';
+import Notes from '@/components/Notes.vue';
 
 export default {
+  name: 'Home',
   components: {
     Notes,
   },
 };
 </script>
-
-<style>
-
-</style>
-Note

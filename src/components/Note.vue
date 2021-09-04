@@ -15,6 +15,7 @@
 
 <script>
 import moment from 'moment';
+import MarkdownIt from 'markdown-it';
 
 export default {
   name: 'Note',
@@ -36,7 +37,8 @@ export default {
   },
   computed: {
     formatMarkdown() {
-      return this.truncate(this.$store.state.md.render(this.note.content), 50);
+      const md = new MarkdownIt();
+      return this.truncate(md.render(this.note.content), 50);
     },
   },
 };
