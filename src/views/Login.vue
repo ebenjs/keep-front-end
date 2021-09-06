@@ -1,20 +1,7 @@
 <template>
   <div class="container">
     <div class="row mt-4">
-      <div
-        class="col-lg-6 lg-offset-1 text-center d-flex flex-column
-        justify-content-center text-center">
-        <h1>Welcome on keep</h1>
-        <h2>The free and opensource note keeping app.</h2>
-        <p class="lead">
-          If you are new here, begins by creating a new account and start saving notes now.
-        </p>
-        <p>
-          <button class="btn btn-lg btn-primary">Create account</button>
-        </p>
-        <!-- <img src="@/assets/img/notes.png" alt="note_picture" class="w-50" /> -->
-      </div>
-      <div class="col-lg-5">
+      <div class="col-lg-4">
         <div class="card">
           <img src="" class="card-img-top" alt="" />
           <div class="card-body">
