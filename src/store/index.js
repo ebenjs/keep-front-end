@@ -1,14 +1,20 @@
 import { createStore } from 'vuex';
-import MarkdownIt from 'markdown-it';
+import createPersistedState from 'vuex-persistedstate';
 
 export default createStore({
   state: {
-    md: new MarkdownIt(),
+    token: '',
+    user: null,
   },
   mutations: {
+    setToken(state, token) {
+      state.token = token;
+    },
+    setUser(state, user) {
+      state.user = user;
+    },
   },
-  actions: {
-  },
-  modules: {
-  },
+  actions: {},
+  modules: {},
+  plugins: [createPersistedState()],
 });

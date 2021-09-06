@@ -1,5 +1,6 @@
 <template>
-  <nav class="border-bottom bg-success text-white">
+  <navbar></navbar>
+  <div class="border-bottom bg-success text-white">
     <div class="container">
       <div class="row py-4">
         <div class="col">
@@ -10,16 +11,18 @@
         </div>
       </div>
     </div>
-  </nav>
+  </div>
   <router-view/>
   <Footer/>
 </template>
 
 <script>
+import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 
 export default {
   components: {
+    Navbar,
     Footer,
   },
 };
