@@ -98,31 +98,19 @@
         </div>
       </div>
     </div>
-    <div class="row pt-3">
-      <div class="col">
-        <h3>List of your created notes</h3>
-      </div>
-      <div class="col text-end">
+    <div class="row pt-4">
+      <div class="col-lg-6 offset-lg-3">
         <form class="d-inline">
           <input
-            class="form-control w-50 me-3 d-inline"
+            class="form-control form-control-lg w-100 me-3 d-inline"
             type="search"
             placeholder="Search for note"
             aria-label="Search"
           />
-          <button class="btn btn-secondary me-3" type="submit">Search</button>
         </form>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-toggle="modal"
-          data-bs-target="#newNoteModal"
-        >
-          Create new note
-        </button>
       </div>
     </div>
-    <div class="row pt-3">
+    <div class="row pt-4">
       <div
         :class="index > 3 ? 'col-lg-3 mt-4' : 'col-lg-3'"
         v-for="(note, index) in notes"
@@ -131,6 +119,15 @@
         <note :note="note" @click="showNote(note)"></note>
       </div>
     </div>
+    <button
+      id="newNoteButton"
+      type="button"
+      class="btn btn-success shadow"
+      data-bs-toggle="modal"
+      data-bs-target="#newNoteModal"
+    >
+    <span class="fas fa-plus"></span>
+    </button>
   </div>
   <div v-else>
     <div class="container">
@@ -355,7 +352,22 @@ export default {
 </script>
 
 <style scoped>
+input[type='search'] {
+  border: solid 1px rgba(0,0,0,0.1);
+  border-radius: 30px;
+  background-color: rgba(100,100,100,0.05);
+  padding-left: 30px;
+}
 .card {
   cursor: pointer;
+}
+#newNoteButton{
+  border: solid 1px rgba(0,0,0,0);
+  position: fixed;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  bottom: 3%;
+  right: 3%;
 }
 </style>
