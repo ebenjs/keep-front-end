@@ -177,11 +177,8 @@ export default {
   },
   watch: {
     searchQueryString(val) {
-      if (val.trim() === '') {
-        this.notes = this.savedNotes;
-      } else {
-        this.notes = this.notes.filter((note) => note.title.includes(val));
-      }
+      // eslint-disable-next-line max-len
+      this.notes = this.savedNotes.filter((note) => note.title.toLowerCase().includes(val.toLowerCase()));
     },
   },
   methods: {
