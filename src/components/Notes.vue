@@ -106,6 +106,7 @@
             type="search"
             placeholder="Search for note"
             aria-label="Search"
+            v-model="searchQueryString"
           />
         </form>
       </div>
@@ -126,7 +127,7 @@
       data-bs-toggle="modal"
       data-bs-target="#newNoteModal"
     >
-    <span class="fas fa-plus"></span>
+      <span class="fas fa-plus"></span>
     </button>
   </div>
   <div v-else>
@@ -160,9 +161,11 @@ export default {
   data() {
     return {
       notes: [],
+      savedNotes: [],
       currentSelectedNote: null,
       noteTitle: '',
       noteContent: '',
+      searchQueryString: null,
       showNoteModal: null,
       showDeleteConfirmationModal: null,
       newNoteModal: null,
@@ -171,6 +174,15 @@ export default {
       currentMode: 1, // 1 for creating, 2 for editing
       headers: '',
     };
+  },
+  watch: {
+    searchQueryString(val) {
+      if (val.trim() === '') {
+        this.notes = this.savedNotes;
+      } else {
+        this.notes = this.notes.filter((note) => note.title.includes(val));
+      }
+    },
   },
   methods: {
     reset() {
@@ -337,6 +349,7 @@ export default {
       .then((response) => {
         if (response.status === 200) {
           this.notes = response.data.notes;
+          this.savedNotes = response.data.notes;
           console.log(this.notes.length);
         }
       })
@@ -353,16 +366,16 @@ export default {
 
 <style scoped>
 input[type='search'] {
-  border: solid 1px rgba(0,0,0,0.1);
+  border: solid 1px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
-  background-color: rgba(100,100,100,0.05);
+  background-color: rgba(100, 100, 100, 0.05);
   padding-left: 30px;
 }
 .card {
   cursor: pointer;
 }
-#newNoteButton{
-  border: solid 1px rgba(0,0,0,0);
+#newNoteButton {
+  border: solid 1px rgba(0, 0, 0, 0);
   position: fixed;
   border-radius: 50%;
   width: 60px;
