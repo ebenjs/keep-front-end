@@ -235,6 +235,8 @@ export default {
           color: this.choosedColor,
           createdDate: Date.now(),
           editedDate: Date.now(),
+          // eslint-disable-next-line no-underscore-dangle
+          userId: this.$store.state.user._id,
         }, {
           headers: {
             Authorization: `Bearer ${this.$store.state.token}`,
@@ -365,6 +367,8 @@ export default {
     });
     axios
       .get('http://localhost:3000/getNotes', {
+        // eslint-disable-next-line no-underscore-dangle
+        params: { userId: this.$store.state.user._id },
         headers: {
           Authorization: `Bearer ${this.$store.state.token}`,
         },
