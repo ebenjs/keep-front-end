@@ -66,6 +66,7 @@ export default {
             this.$store.commit('setUser', response.data.user);
             this.errorType = 'success';
             this.errorMessage = response.data.message;
+            this.$router.push({ name: 'home' });
           }
         })
         .catch((error) => {
