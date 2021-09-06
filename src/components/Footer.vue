@@ -1,12 +1,12 @@
 <template>
-  <footer class="border-top">
+  <footer class="border-top mt-5">
     <div class="container">
       <div class="row">
-        <div class="col py-3 lead">
+        <div class="col py-3">
           &copy; copyrights {{ currentYear }}
           Keep.
           Note taking app. Version 0.1.0
-          <p class="lead">License MIT</p>
+          <p>License MIT</p>
         </div>
       </div>
     </div>
