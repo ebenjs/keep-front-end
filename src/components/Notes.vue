@@ -58,6 +58,14 @@
           <div class="modal-body">
             <p>{{ noteModeModalDescription }}</p>
             <div>
+              <label for="exampleColorInput" class="form-label">Choose note color</label>
+              <input
+                type="color"
+                class="form-control form-control-color"
+                title="Choose your color"
+                v-model="choosedColor"
+              />
+              <br/>
               <input type="text" class="form-control" v-model="noteTitle" placeholder="Title" />
               <textarea
                 class="form-control mt-3"
@@ -106,6 +114,7 @@
             type="search"
             placeholder="Search for note"
             aria-label="Search"
+            v-model="searchQueryString"
           />
         </form>
       </div>
@@ -126,7 +135,7 @@
       data-bs-toggle="modal"
       data-bs-target="#newNoteModal"
     >
-    <span class="fas fa-plus"></span>
+      <span class="fas fa-plus"></span>
     </button>
   </div>
   <div v-else>
@@ -160,9 +169,12 @@ export default {
   data() {
     return {
       notes: [],
+      savedNotes: [],
       currentSelectedNote: null,
+      choosedColor: null,
       noteTitle: '',
       noteContent: '',
+      searchQueryString: null,
       showNoteModal: null,
       showDeleteConfirmationModal: null,
       newNoteModal: null,
@@ -171,6 +183,12 @@ export default {
       currentMode: 1, // 1 for creating, 2 for editing
       headers: '',
     };
+  },
+  watch: {
+    searchQueryString(val) {
+      // eslint-disable-next-line max-len
+      this.notes = this.savedNotes.filter((note) => note.title.toLowerCase().includes(val.toLowerCase()));
+    },
   },
   methods: {
     reset() {
@@ -214,8 +232,13 @@ export default {
         .post('http://localhost:3000/newNote', {
           title: this.noteTitle,
           content: this.noteContent,
+          color: this.choosedColor,
           createdDate: Date.now(),
           editedDate: Date.now(),
+        }, {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
         })
         .then((response) => {
           if (response.status === 201) {
@@ -240,6 +263,7 @@ export default {
       this.newNoteModal.toggle();
       this.noteTitle = this.currentSelectedNote.title;
       this.noteContent = this.currentSelectedNote.content;
+      this.choosedColor = this.currentSelectedNote.color;
     },
     editNoteEffective() {
       axios
@@ -247,8 +271,13 @@ export default {
           // eslint-disable-next-line no-underscore-dangle
           _id: this.currentSelectedNote._id,
           title: this.noteTitle,
+          color: this.choosedColor,
           content: this.noteContent,
           editedDate: Date.now(),
+        }, {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
         })
         .then((response) => {
           if (response.status === 201) {
@@ -259,6 +288,7 @@ export default {
             this.currentSelectedNote.title = response.data.note.title;
             this.currentSelectedNote.content = response.data.note.content;
             this.currentSelectedNote.editedDate = response.data.note.editedDate;
+            this.currentSelectedNote.color = response.data.note.color;
           }
         })
         .catch((error) => {
@@ -275,7 +305,12 @@ export default {
     },
     deleteNoteEffective() {
       axios
-        .delete('http://localhost:3000/deleteNote', { data: this.currentSelectedNote })
+        .delete('http://localhost:3000/deleteNote', {
+          data: this.currentSelectedNote,
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
+        })
         .then((response) => {
           if (response.status === 204) {
             this.showDeleteConfirmationModal.toggle();
@@ -337,6 +372,7 @@ export default {
       .then((response) => {
         if (response.status === 200) {
           this.notes = response.data.notes;
+          this.savedNotes = response.data.notes;
           console.log(this.notes.length);
         }
       })
@@ -353,16 +389,16 @@ export default {
 
 <style scoped>
 input[type='search'] {
-  border: solid 1px rgba(0,0,0,0.1);
+  border: solid 1px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
-  background-color: rgba(100,100,100,0.05);
+  background-color: rgba(100, 100, 100, 0.05);
   padding-left: 30px;
 }
 .card {
   cursor: pointer;
 }
-#newNoteButton{
-  border: solid 1px rgba(0,0,0,0);
+#newNoteButton {
+  border: solid 1px rgba(0, 0, 0, 0);
   position: fixed;
   border-radius: 50%;
   width: 60px;
