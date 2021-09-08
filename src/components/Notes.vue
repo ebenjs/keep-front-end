@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="modal fade" id="showNoteModal" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
             <div class="row w-100">
