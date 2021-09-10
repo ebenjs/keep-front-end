@@ -368,7 +368,7 @@ export default {
     axios
       .get('http://localhost:3000/getNotes', {
         // eslint-disable-next-line no-underscore-dangle
-        params: { userId: this.$store.state.user._id },
+        params: { userId: this.$store.state.user ? this.$store.state.user._id : '' },
         headers: {
           Authorization: `Bearer ${this.$store.state.token}`,
         },
