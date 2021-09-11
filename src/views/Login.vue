@@ -8,7 +8,7 @@
             <h5 class="card-title">Login</h5>
             <p class="card-text">
               Login to your account to start taking notes or
-              <router-link to="/">create a new account</router-link>
+              <router-link to="/register">create a new account</router-link>
               if you don't already have one.
             </p>
             <form>

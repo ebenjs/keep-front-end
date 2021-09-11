@@ -36,7 +36,7 @@
             <router-link class="nav-link active" to="/login">Login</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link active" to="/">Signup</router-link>
+            <router-link class="nav-link active" to="/register">Signup</router-link>
           </li>
         </ul>
         <div v-if="!isAuthenticated()">
