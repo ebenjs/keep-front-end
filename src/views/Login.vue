@@ -8,7 +8,7 @@
             <h5 class="card-title">Login</h5>
             <p class="card-text">
               Login to your account to start taking notes or
-              <router-link to="/">create a new account</router-link>
+              <router-link to="/register">create a new account</router-link>
               if you don't already have one.
             </p>
             <form>
@@ -34,6 +34,16 @@
           </div>
         </div>
       </div>
+      <div class="col-lg-4" v-if="newlyCreated">
+        <h4 class="alert-heading">Well done!</h4>
+        <div class="alert alert-success" role="alert">
+          Your account is successfully created, you can now enter your credentials to log in.
+          <hr />
+          <p class="mb-0">
+            If you have any trouble, contact us.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -50,6 +60,7 @@ export default {
       errorMessage: '',
       errorType: 'danger',
       token: '',
+      newlyCreated: false,
     };
   },
   methods: {
@@ -78,6 +89,9 @@ export default {
           }
         });
     },
+  },
+  mounted() {
+    this.newlyCreated = this.$route.params.newlyCreated;
   },
 };
 </script>
