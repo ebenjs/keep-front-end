@@ -114,7 +114,7 @@ export default {
             this.$store.commit('setUser', response.data.user);
             this.errorType = 'success';
             this.errorMessage = response.data.message;
-            this.$router.push({ name: 'home' });
+            this.$router.push({ name: 'login', params: { newlyCreated: true } });
           }
         })
         .catch((error) => {
@@ -126,6 +126,7 @@ export default {
             this.errorType = 'danger';
             this.errorMessage = error.response.data.message;
             if (error.response.data.errors) this.errorsList = error.response.data.errors;
+            else this.errorsList = [];
           } else {
             throw error;
           }
