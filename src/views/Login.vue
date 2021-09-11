@@ -92,7 +92,6 @@ export default {
   },
   mounted() {
     this.newlyCreated = this.$route.params.newlyCreated;
-    console.log('result', this.$route.params.id);
   },
 };
 </script>
