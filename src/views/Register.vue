@@ -119,10 +119,6 @@ export default {
         })
         .catch((error) => {
           if (error.response) {
-            console.log('error', error);
-            console.log('error', error.response);
-            console.log('error', error.response.data);
-            console.log('error', error.response.data.message);
             this.errorType = 'danger';
             this.errorMessage = error.response.data.message;
             if (error.response.data.errors) this.errorsList = error.response.data.errors;
